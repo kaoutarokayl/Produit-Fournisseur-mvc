@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Détail Fournisseur</title>
+
+    <style>
+
+        /* Style général de la page */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* En-têtes principaux */
+        h1, h2 , h3 {
+            text-align: center;
+            color: #4a90e2;
+            font-weight: 300;
+            margin-top: 20px;
+        }
+
+        /* Tableau stylisé */
+        table {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            border-collapse: collapse;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4a90e2;
+            color: white;
+            font-weight: normal;
+            text-transform: uppercase;
+        }
+
+        td {
+            background-color: white;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover td {
+            background-color: #f0f8ff;
+        }
+
+        /* Liens et boutons de retour */
+        a, .return-link {
+            color: #4a90e2;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .return-link {
+            display: inline-block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            color: white;
+            background-color: #4a90e2;
+            border-radius: 5px;
+            text-align: center;
+            transition: background 0.3s ease;
+        }
+
+        .return-link:hover {
+            background-color: #357ABD;
+        }
+
+        /* Liste stylisée des produits fournis */
+        ul {
+            list-style: none;
+            padding: 0;
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        ul li {
+            background: #ffffff;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        ul li:hover {
+            transform: scale(1.02);
+        }
+
+        /* Petits détails de style */
+        p {
+            text-align: center;
+            color: #666;
+        }
+
+        container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+    </style>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
+</head>
+<body>
+<h1>Détails du Fournisseur</h1>
+<h2 th:text="${fournisseur.nom}">Nom du fournisseur</h2>
+<p><strong>Contact:</strong> <span th:text="${fournisseur.contact}">Contact</span></p>
+
+<h3>Produits Fournis </h3>
+<ul>
+    <li th:each="produit : ${fournisseur.produitsFournis}">
+        <span th:text="${produit.nom}">Nom du produit</span> - Quantité : <span th:text="${produit.quantiteEnStock}">Quantité</span>
+    </li>
+</ul>
+<button onclick="goBack()" class="return-link">Retour à la page précédente</button>
+
+</body>
+</html>
