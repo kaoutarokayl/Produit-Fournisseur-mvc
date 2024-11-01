@@ -29,26 +29,9 @@ public class ProduitService {
         return produitRepository.findById(id);
     }
 
-    // Mettre à jour un produit
-   /* public Produit updateProduit(Produit produitDetails) {
-        Produit produit = produitRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Produit non trouvé avec ID : " + id));
 
-        if (produitDetails.getNom() != null) {
-            produit.setNom(produitDetails.getNom());
-        }
-        if (produitDetails.getQuantiteEnStock() >= 0) { // Vérifiez que la quantité est valide
-            produit.setQuantiteEnStock(produitDetails.getQuantiteEnStock());
-        }
-        if (produitDetails.getFournisseur() != null) {
-            // Vous pouvez ajouter une vérification pour s'assurer que le fournisseur existe
-            produit.setFournisseur(produitDetails.getFournisseur());
-        }
 
-        return produitRepository.save(produit);
-    }
 
-*/
     // Supprimer un produit par ID
     public void deleteProduit(Long id) {
         produitRepository.deleteById(id);

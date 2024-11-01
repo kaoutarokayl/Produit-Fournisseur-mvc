@@ -20,5 +20,6 @@ public class Produit {
 
     @ManyToOne
     @JoinColumn(name = "fournisseur_id")
+
     private Fournisseur fournisseur;
 }

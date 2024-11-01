@@ -21,14 +21,18 @@ public class ProduitapprovisionmvcApplication {
 	CommandLineRunner commandeLineRunner (ProduitRepository produitRepository, FournisseurRepository fournisseurRepository){
 		return args -> {
 // Créer quelques fournisseurs
-			Fournisseur fournisseur1 = new Fournisseur(1L,"Fournisseur A", 06756);
-			Fournisseur fournisseur2 = new Fournisseur(2L,"Fournisseur B", 33);
-
+			Fournisseur fournisseur1 = new Fournisseur(1L,"Fournisseur A", 067562);
+			Fournisseur fournisseur2 = new Fournisseur(2L,"Fournisseur B", 063722);
+			Fournisseur fournisseur3 = new Fournisseur(3L,"Fournisseur C", 063556);
+			Fournisseur fournisseur4 = new Fournisseur(4L,"Fournisseur D", 063732);
 			// Enregistrer les fournisseurs dans la base de données
 			fournisseurRepository.save(fournisseur1);
 			fournisseurRepository.save(fournisseur2);
+			fournisseurRepository.save(fournisseur3);
+			fournisseurRepository.save(fournisseur4);
 
-			// Créer des produits et les associer aux fournisseurs
+
+			/*// Créer des produits et les associer aux fournisseurs
 			Produit produit1 = new Produit(1L,"Produit 1", 100, fournisseur1);
 			Produit produit2 = new Produit(2L,"Produit 2", 50, fournisseur1);
 			Produit produit3 = new Produit(3L,"Produit 3", 200, fournisseur2);
@@ -38,7 +42,7 @@ public class ProduitapprovisionmvcApplication {
 			produitRepository.save(produit2);
 			produitRepository.save(produit3);
 
-
+*/
 			System.out.println("Données initialisées avec succès !");
 		};
 	}
