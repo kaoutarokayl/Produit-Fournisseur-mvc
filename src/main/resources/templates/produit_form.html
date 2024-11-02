@@ -3,29 +3,30 @@
 <head>
   <title> Produit </title>
   <style>
-    /* Style CSS - Vous pouvez le déplacer dans un fichier CSS séparé */
+    /* Style de la page */
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f5f5f5; /* Gris clair */
+      background-color: #f0f2f5; /* Gris clair */
       margin: 0;
-      padding: 0;
       color: #333; /* Gris foncé */
     }
 
+    /* En-têtes */
     h1 {
       text-align: center;
-      color: #007bff; /* Bleu */
+      color: rgba(199, 151, 124, 0.73); /* Bleu clair */
       font-weight: 300;
       margin-top: 20px;
     }
 
+    /* Formulaire */
     form {
       width: 400px;
       margin: 20px auto;
       padding: 20px;
-      background-color: #fff;
+      background-color: #fff; /* Blanc */
       border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 8px rgba(199, 151, 124, 0.73); /* Ombre du formulaire */
     }
 
     label {
@@ -41,27 +42,28 @@
       width: 100%;
       padding: 10px;
       margin-bottom: 15px;
-      border: 1px solid #ddd;
+      border: 1px solid #ddd; /* Bordure grise */
       border-radius: 4px;
       box-sizing: border-box;
     }
 
     button[type="submit"] {
-      background-color: #007bff; /* Bleu */
-      color: white;
+      background-color: rgba(199, 151, 124, 0.73); /* Bleu clair */
+      color: white; /* Blanc */
       padding: 10px 20px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease; /* Effet de transition pour le hover */
     }
 
     button[type="submit"]:hover {
-      background-color: #0069d9; /* Bleu foncé */
+      background-color: rgba(199, 151, 124, 0.73); /* Bleu plus foncé */
     }
 
+    /* Style des liens */
     a {
-      color: #007bff; /* Bleu */
+      color: rgba(199, 151, 124, 0.73); /* Bleu clair */
       text-decoration: none;
       font-weight: bold;
     }
@@ -70,16 +72,27 @@
       text-decoration: underline;
     }
 
-    .error {
-      color: red;
-      margin-bottom: 10px;
+    /* Style supplémentaire pour le select */
+    select {
+      appearance: none; /* Supprime le style par défaut du select */
+      -webkit-appearance: none; /* Pour les navigateurs WebKit */
+      -moz-appearance: none; /* Pour les navigateurs Firefox */
+      background-color: #fff; /* Fond blanc */
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><path fill='%234a90e2' d='M4 7l4 4 4-4z'/></svg>"); /* Image SVG pour la flèche */
+      background-repeat: no-repeat;
+      background-position: right 10px center; /* Position de l'image */
+      background-size: 10px 10px; /* Taille de l'image */
+      padding-right: 30px; /* Espacement pour l'image */
     }
 
-    /* ... (reste du CSS) */
+    /* Style pour le select en hover */
+    select:hover {
+      background-color: #f0f8ff; /* Bleu clair transparent */
+    }
   </style>
 </head>
 <body>
-<h1>Entrer ou Modifier</h1>
+<h1>  </h1>
 
 <form th:action="${produit.id != null ? '/produits/save' : '/produits/save'}" method="post">
   <!-- Champs cachés pour l'ID du produit -->

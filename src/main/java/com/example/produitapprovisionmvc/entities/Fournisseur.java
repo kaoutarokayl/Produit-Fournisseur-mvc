@@ -23,7 +23,7 @@ public class Fournisseur {
     private long contact;
 
     @OneToMany(mappedBy = "fournisseur", cascade = CascadeType.ALL)
-    private List<Produit> produitsFournis = new ArrayList<>();
+    private List<Produit> produitsFournis ;
 
     public Fournisseur(Long id, String nom, long contact) {
         this.id = id;

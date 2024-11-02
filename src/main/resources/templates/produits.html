@@ -2,21 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Liste des Produits</title>
-
   <style>
     /* Style de la page */
-
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f0f2f5;
       margin: 0;
       color: #333;
+
     }
 
     /* En-têtes */
-    h1, h2 {
+    h1 {
       text-align: center;
-      color: #4a90e2;
+      color: rgba(199, 151, 124, 0.73); /* Bleu clair */
       font-weight: 300;
       margin-top: 20px;
     }
@@ -29,7 +28,7 @@
       border-collapse: collapse;
       border-radius: 8px;
       overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 8px rgba(199, 151, 124, 0.73); /* Ombre du tableau */
     }
 
     th, td {
@@ -38,7 +37,7 @@
     }
 
     th {
-      background-color: #4a90e2;
+      background-color: rgba(199, 151, 124, 0.73); /* Bleu clair */
       color: white;
       font-weight: normal;
       text-transform: uppercase;
@@ -50,12 +49,12 @@
     }
 
     tr:hover td {
-      background-color: #f0f8ff;
+      background-color: #f0f8ff; /* Bleu clair transparent */
     }
 
     /* Style des boutons et liens */
     a, .return-link {
-      color: #4a90e2;
+      color: rgba(199, 151, 124, 0.73); /* Bleu clair */
       text-decoration: none;
       font-weight: bold;
     }
@@ -65,47 +64,31 @@
       margin: 20px auto;
       padding: 10px 20px;
       color: white;
-      background-color: #4a90e2;
+      background-color: rgba(199, 151, 124, 0.73); /* Bleu clair */
       border-radius: 5px;
       text-align: center;
-      transition: background 0.3s ease;
+      transition: background 0.3s ease; /* Effet de transition pour le hover */
     }
 
     .return-link:hover {
-      background-color: #357ABD;
+      background-color: rgba(199, 151, 124, 0.73); /* Bleu plus foncé */
     }
 
-    ul {
-      list-style: none;
-      padding: 0;
-      width: 80%;
-      margin: 20px auto;
+    /* Style des liens d'ajout */
+    a {
+      display: block; /* Afficher les liens comme blocs */
+      width: 200px; /* Largeur des liens */
+      margin: 10px auto; /* Marge autour des liens */
+      padding: 10px; /* Rembourrage dans les liens */
+      text-align: center; /* Centrer le texte */
+      color: white; /* Couleur du texte */
+      background-color: rgba(199, 151, 124, 0.73);
+      border-radius: 5px; /* Arrondir les coins */
+      text-decoration: none; /* Supprimer le soulignement */
     }
 
-    ul li {
-      background: #ffffff;
-      margin-bottom: 10px;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s;
-    }
-
-    ul li:hover {
-      transform: scale(1.02);
-    }
-
-    /* Petites touches pour un style épuré */
-
-    p {
-      text-align: center;
-      color: #666;
-    }
-
-    .container {
-      width: 90%;
-      max-width: 1200px;
-      margin: 0 auto;
+    a:hover {
+      background-color: rgba(199, 151, 124, 0.73);
     }
   </style>
 </head>
@@ -117,6 +100,7 @@
     <th>Nom</th>
     <th>Quantité</th>
     <th>Fournisseur</th>
+    <th>Actions</th>
   </tr>
   </thead>
   <tbody>
@@ -132,5 +116,9 @@
   </tbody>
 </table>
 <a href="/produits/new">Ajouter un Nouveau Produit</a>
+<a href="/fournisseur_form">Ajouter un Nouveau Fournisseur</a>
+
 </body>
+
+
 </html>

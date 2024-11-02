@@ -3,8 +3,9 @@ package com.example.produitapprovisionmvc.web;
 
 import com.example.produitapprovisionmvc.entities.Fournisseur;
 import com.example.produitapprovisionmvc.entities.Produit;
-import com.example.produitapprovisionmvc.service.FournisseurService;
-import com.example.produitapprovisionmvc.service.ProduitService;
+
+import com.example.produitapprovisionmvc.repositories.FournisseurRepository;
+import com.example.produitapprovisionmvc.repositories.ProduitRepository;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,94 +23,58 @@ import java.util.Optional;
 @Controller
 public class ProduitController {
     @Autowired
-    private ProduitService produitService;
-
+    private ProduitRepository produitRepository;
     @Autowired
-    private FournisseurService fournisseurService;
+    private FournisseurRepository fournisseurRepository;
 
     // Afficher la liste des produits
     @GetMapping("/produits")
     public String listeProduits(Model model) {
-        model.addAttribute("produits", produitService.findAllProduits());
+        model.addAttribute("produits", produitRepository.findAll());
         return "produits";
     }
 
-    // Afficher le formulaire de création d'un nouveau produit
+
     @GetMapping("/produits/new")
     public String creerProduit(Model model) {
         model.addAttribute("produit", new Produit());
-        model.addAttribute("fournisseurs", fournisseurService.findAllFournisseurs());
+        model.addAttribute("fournisseurs", fournisseurRepository.findAll());
+        // Rediriger vers le formulaire du fournisseur
         return "produit_form";
     }
 
     // Enregistrer un produit (ajouter ou modifier)
-
     @PostMapping("/produits/save")
-    public String saveProduit( @Validated @ModelAttribute ("produit") Produit produit,
-                               BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+    public String saveProduit(@Validated @ModelAttribute("produit") Produit produit,
+                              BindingResult result, Model model, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
-            model.addAttribute("fournisseurs", fournisseurService.findAllFournisseurs());
+            model.addAttribute("fournisseurs", fournisseurRepository.findAll());
             return "produit_form";
         }
+
         // Récupérer le fournisseur associé
-        Fournisseur fournisseur = fournisseurService.findFournisseurById(produit.getFournisseur().getId());
+        Fournisseur fournisseur = fournisseurRepository.findById(produit.getFournisseur().getId())
+                .orElseThrow(() -> new RuntimeException("Fournisseur non trouvé"));
         produit.setFournisseur(fournisseur);
-        produitService.saveProduit(produit);
+
+        produitRepository.save(produit);
         return "redirect:/produits";
     }
 
     // Afficher le formulaire de modification d'un produit
     @GetMapping("/produits/edit/{id}")
     public String editerProduit(@PathVariable Long id, Model model) {
-        Produit produit = produitService.findProduitById(id)
+        Produit produit = produitRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Produit non trouvé"));
         model.addAttribute("produit", produit);
-        model.addAttribute("fournisseurs", fournisseurService.findAllFournisseurs());
+        model.addAttribute("fournisseurs", fournisseurRepository.findAll());
         return "produit_form";
     }
-    @PostMapping("/produits/edit/{id}")
-    public String updateProduit(@PathVariable Long id, @ModelAttribute Produit produit, BindingResult result) {
-        // Vérification des erreurs
-        if (result.hasErrors()) {
-            return "produit_form"; // Renvoie le formulaire si des erreurs sont présentes
-        }
-
-
-
-
-        // Vérifiez si le produit existe
-        Produit existingProduit = produitService.findProduitById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Produit non trouvé"));
-
-        // Mettez à jour le produit
-        existingProduit.setNom(produit.getNom());
-        existingProduit.setQuantiteEnStock(produit.getQuantiteEnStock());
-
-        // Assurez-vous que le fournisseur est bien associé
-        if (produit.getFournisseur() != null) {
-            existingProduit.setFournisseur(produit.getFournisseur());
-        }
-
-      //  produitService.updateProduit(existingProduit.getId(), existingProduit); // Mettez à jour le produit dans le service
-
-        return "redirect:/produits"; // Redirige vers la liste des produits après la mise à jour
-    }
-    @PostMapping("/produit/modifier/{id}")
-    public String modifierProduit(@Valid @ModelAttribute("produit") Produit produit,
-                                  BindingResult result, RedirectAttributes redirectAttributes) {
-        if (result.hasErrors()) {
-            redirectAttributes.addFlashAttribute("errors", result.getAllErrors());
-            return "redirect:/produit/modifier/" + produit.getId(); // Rediriger vers le formulaire de modification
-        }
-        produitService.saveProduit(produit);
-        return "redirect:/produits";
-    }
-
 
     // Supprimer un produit
     @GetMapping("/produits/delete/{id}")
     public String supprimerProduit(@PathVariable Long id) {
-        produitService.deleteProduit(id);
+        produitRepository.deleteById(id);
         return "redirect:/produits";
     }
 }

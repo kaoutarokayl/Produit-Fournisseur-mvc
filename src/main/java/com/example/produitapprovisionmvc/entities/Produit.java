@@ -19,7 +19,5 @@ public class Produit {
     private int quantiteEnStock;
 
     @ManyToOne
-    @JoinColumn(name = "fournisseur_id")
-
     private Fournisseur fournisseur;
 }
